@@ -12,12 +12,31 @@ public class ReaderReview {
   Random rand = new Random();
 
   public void addReader() {
-    System.out.println("\n\nEnter Reader's Name :");
-    String name = scanner.nextLine();
-    System.out.println("\n\nEnter Reader's Address :");
-    String address = scanner.nextLine();
-    System.out.println("\n\nEnter State Of Origin : ");
-    String stateOfOrigin = scanner.nextLine();
+      //TO GIVE ERROR EXCEPTION AND RETURN TO MENU
+
+      //    System.out.println("\n\nEnter Reader's Name :");
+//      String name = scanner.nextLine().trim();
+//      if (name.isEmpty()) {
+//          System.out.println("Name cannot be empty. Please enter a valid name.");
+//          return;
+//      }
+      String name;
+      do {
+          System.out.println("\nEnter Reader's Name:");
+          name = scanner.nextLine().trim();
+      } while (name.isEmpty());
+
+      String address;
+      do {
+          System.out.println("\nEnter Reader's Address:");
+          address = scanner.nextLine().trim();
+      } while (address.isEmpty());
+
+      String stateOfOrigin;
+      do {
+          System.out.println("\nEnter Reader's State Of Origin:");
+          stateOfOrigin = scanner.nextLine().trim();
+      } while (stateOfOrigin.isEmpty());
     //id again
     int rand2 = rand.nextInt(1000);
     System.out.println("\n\nYour ID is : " + "LIB-" +rand2);
@@ -67,17 +86,58 @@ public class ReaderReview {
 //        System.out.println("Reader with ID " + idToConvert + " not found.");
 //    }
 
-    public void convertReaderToLibrarian(LibrarianReview library) {
-        System.out.println("Enter the ID of the reader you want to convert to librarian:");
-        int idToConvert = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+//    public void convertReaderToLibrarian(LibrarianReview library) {
+//        System.out.println("Enter the ID of the reader you want to convert to librarian:");
+//        int idToConvert = scanner.nextInt();
+//        scanner.nextLine(); // Consume newline
+//
+//        Iterator<Readers> iterator = reader.iterator();
+//        while (iterator.hasNext()) {
+//            Readers reader = iterator.next();
+//            if (reader.getId() == idToConvert) {
+//                iterator.remove(); // Remove the reader from the list
+//
+//                // Create a new librarian object using the reader's information
+//                Librarian newLibrarian = new Librarian();
+//                newLibrarian.setId(reader.getId());
+//                newLibrarian.setName(reader.getName());
+//                newLibrarian.setAddress(reader.getAddress());
+//                newLibrarian.setStateOfOrigin(reader.getStateOfOrigin());
+//
+//                // Add the new librarian to the list of librarians
+//                library.getLibarians().add(newLibrarian);
+//
+//                System.out.println("Reader converted to librarian successfully.");
+//                return;
+//            }
+//        }
+//
+//        System.out.println("Reader with ID " + idToConvert + " not found.");
+//    }
+public void convertReaderToLibrarian(LibrarianReview library) {
+    System.out.println("Enter the ID of the reader you want to convert to librarian:");
+    int idToConvert = scanner.nextInt();
+    scanner.nextLine(); // Consume newline
 
-        Iterator<Readers> iterator = reader.iterator();
-        while (iterator.hasNext()) {
-            Readers reader = iterator.next();
-            if (reader.getId() == idToConvert) {
-                iterator.remove(); // Remove the reader from the list
+    Iterator<Readers> iterator = reader.iterator();
+    while (iterator.hasNext()) {
+        Readers reader = iterator.next();
+        if (reader.getId() == idToConvert) {
+            // Remove the reader from the list of readers
+            iterator.remove();
 
+            // Check if the ID already exists for a librarian
+            boolean idExists = false;
+            for (Librarian librarian : library.getLibarians()) {
+                if (librarian.getId() == idToConvert) {
+                    idExists = true;
+                    break;
+                }
+            }
+
+            if (idExists) {
+                System.out.println("A librarian with ID " + idToConvert + " already exists. Please choose a different ID.");
+            } else {
                 // Create a new librarian object using the reader's information
                 Librarian newLibrarian = new Librarian();
                 newLibrarian.setId(reader.getId());
@@ -89,12 +149,14 @@ public class ReaderReview {
                 library.getLibarians().add(newLibrarian);
 
                 System.out.println("Reader converted to librarian successfully.");
-                return;
             }
+            return;
         }
-
-        System.out.println("Reader with ID " + idToConvert + " not found.");
     }
+    System.out.println("Reader with ID " + idToConvert + " not found.");
+}
+
+
 
 
 
