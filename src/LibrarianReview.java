@@ -7,7 +7,11 @@ public class LibrarianReview {
     private LinkedList<Librarian> libarians= new LinkedList<>();
     Scanner scanner = new Scanner(System.in);
     Random rand = new Random();
-    
+
+
+    public LinkedList<Librarian> getLibarians() {
+        return libarians;
+    }
 
     public void addLibarian() {
         System.out.println("Enter Libarian's Name :");
@@ -34,13 +38,14 @@ public class LibrarianReview {
         newLibarian.setId(rand_int1);
 
         libarians.add(newLibarian);
+        //
+
     }
 
     public void viewLibarians(){
         System.out.println("\nList Of Libarians : ");
         for (Librarian libarian : libarians)
             System.out.println("ID:" + "LIB-" + libarian.getId() + "\nName : " + libarian.getName() + "\nAddress : " + libarian.getAddress() +"\nState Of Origin : " + libarian.getStateOfOrigin());
-
     }
 
     

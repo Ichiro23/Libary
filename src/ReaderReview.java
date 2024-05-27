@@ -38,10 +38,34 @@ public class ReaderReview {
       System.out.println("\nID :" + "LIB-" + readers.getId() + "\n\nName : " + readers.getName()+ "\n\nAddress: " + readers.getAddress() + "\n\nState Of Origin : " + readers.getStateOfOrigin());
   }
 
-  public enum Position{
-    Reader;
-    Librarian;
-  }
+    public void convertReaderToLibrarian(LibrarianReview library) {
+        System.out.println("Enter the ID of the reader you want to convert to librarian:");
+        int idToConvert = scanner.nextInt();
+
+        for (Readers reader : reader) {
+            if (reader.getId() == idToConvert) {
+                // Remove the reader from the list of readers
+                Readers.remove(reader);
+
+                // Create a new librarian object using the reader's information
+                Librarian newLibrarian = new Librarian();
+                newLibrarian.setId(reader.getId());
+                newLibrarian.setName(reader.getName());
+                newLibrarian.setAddress(reader.getAddress());
+                newLibrarian.setStateOfOrigin(reader.getStateOfOrigin());
+
+                // Add the new librarian to the list of librarians
+                library.getLibarians().add(newLibrarian);
+
+                System.out.println("Reader converted to librarian successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Reader with ID " + idToConvert + " not found.");
+    }
+
+
 
 }
 

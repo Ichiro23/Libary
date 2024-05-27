@@ -15,6 +15,10 @@ public class Readers {
 
     }
 
+    public static void remove(Readers reader) {
+
+    }
+
     public String getStateOfOrigin() {
         return stateOfOrigin;
     }

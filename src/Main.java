@@ -30,6 +30,10 @@ public class Main {
                 case 4:
                     library.viewLibarians();
                     break;
+                case 5:
+                    lib.convertReaderToLibrarian(library);
+                    break;
+
 
                 case 6:
                     System.out.println("Goodbye...");
